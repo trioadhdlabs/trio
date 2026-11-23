@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="{{ site.lang | default: 'en-US' }}">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+{% seo %}
+    <link rel="stylesheet" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}">
+    {% include head-custom.html %}
+  </head>
+  {% assign is_home = false %}{% if page.url == '/' %}{% assign is_home = true %}{% endif %}
+  <body class="{% if is_home %}home{% else %}subpage{% endif %}">
+    {% unless is_home %}
+    <header class="topbar">
+      <a class="brand" href="{{ '/' | relative_url }}">
+        <img src="{{ '/app-icon.png' | relative_url }}" alt="" width="32" height="32">
+        <span>{{ site.title }}</span>
+      </a>
+      <nav>
+        <a href="{{ '/support/' | relative_url }}"{% if page.url == '/support/' %} class="active" aria-current="page"{% endif %}>Support</a>
+        <a href="{{ '/privacy-policy/' | relative_url }}"{% if page.url == '/privacy-policy/' %} class="active" aria-current="page"{% endif %}>Privacy</a>
+      </nav>
+    </header>
+    {% endunless %}
+
+    <main class="container-lg px-3 my-5 markdown-body">
+      {{ content }}
+    </main>
+
+    {% unless is_home %}
+    <footer class="page-footer">
+      <a class="badge" href="https://apps.apple.com/app/id{{ site.app_store_id }}">
+        <img src="{{ '/app-store-badge.svg' | relative_url }}" alt="Download on the App Store" height="44" width="131">
+      </a>
+      <p>
+        <a href="{{ '/' | relative_url }}">Home</a> ·
+        <a href="{{ '/support/' | relative_url }}">Support</a> ·
+        <a href="{{ '/privacy-policy/' | relative_url }}">Privacy</a>
+      </p>
+    </footer>
+    {% endunless %}
+  </body>
+</html>

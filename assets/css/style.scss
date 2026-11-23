@@ -41,47 +41,26 @@ body::before {
 
 .container-lg { max-width: 720px; }
 
+// ---------- Shared text styles ----------
 .markdown-body {
   color: $ink;
   font-family: inherit;
   font-size: 17px;
   line-height: 1.65;
 
-  // Readable card for Support / Privacy pages.
-  background: $card;
-  border: 1px solid $line;
-  border-radius: 24px;
-  padding: 32px 28px !important;
-  box-shadow: 0 20px 60px rgba(20, 20, 20, 0.08);
-
   h1, h2, h3 {
     color: $ink;
-    border-bottom-color: $line;
+    border-bottom: 0;
     font-weight: 800;
     letter-spacing: -0.02em;
   }
   a { color: $ink; text-decoration: underline; text-underline-offset: 3px; }
   p, li { color: #2b2925; }
+  em { color: $muted; }
   hr { background-color: $line; }
-
-  // Site name at the top of sub pages: a small centered brand link.
-  > h1:not([id]) {
-    text-align: center;
-    border: 0;
-    margin-bottom: 8px;
-    font-size: 1.4em;
-    a { text-decoration: none; }
-  }
 }
 
-// Home page: no card, everything centered.
-body:has(.hero) .markdown-body {
-  background: none;
-  border: 0;
-  box-shadow: none;
-  padding: 0 !important;
-}
-
+// ---------- Home ----------
 .hero {
   text-align: center;
   padding: 32px 0 8px;
@@ -95,7 +74,6 @@ body:has(.hero) .markdown-body {
   }
   h1 {
     margin: 28px 0 0;
-    border: 0;
     padding: 0;
     font-size: 3.6em;
     line-height: 1;
@@ -134,7 +112,7 @@ body:has(.hero) .markdown-body {
     text-align: center;
     box-shadow: 0 8px 24px rgba(20, 20, 20, 0.05);
   }
-  h3 { margin: 0 0 6px; border: 0; font-size: 1.1em; }
+  h3 { margin: 0 0 6px; font-size: 1.1em; }
   p { margin: 0; color: $muted; font-size: 0.95em; line-height: 1.5; }
 }
 
@@ -145,8 +123,118 @@ body:has(.hero) .markdown-body {
   a { margin: 0 10px; }
 }
 
+// ---------- Support / Privacy ----------
+.topbar {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 20px 16px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: $ink;
+    text-decoration: none;
+    font-weight: 800;
+    font-size: 1.25em;
+    letter-spacing: -0.02em;
+    img { border-radius: 8px; }
+  }
+  nav {
+    display: flex;
+    gap: 6px;
+    a {
+      color: $muted;
+      text-decoration: none;
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-size: 0.95em;
+    }
+    a:hover { color: $ink; }
+    a.active { color: #fff; background: $ink; }
+  }
+}
+
+.subpage .markdown-body {
+  margin-top: 28px !important;
+  background: $card;
+  border: 1px solid $line;
+  border-radius: 24px;
+  padding: 40px 36px !important;
+  box-shadow: 0 20px 60px rgba(20, 20, 20, 0.08);
+
+  // Page title + "Last updated" line.
+  > h1:first-child {
+    text-align: center;
+    font-size: 2.6em;
+    line-height: 1.1;
+    margin: 0 0 8px;
+  }
+  > h1:first-child + p {
+    text-align: center;
+    font-size: 0.9em;
+    margin-bottom: 28px;
+  }
+
+  // Section headings with a short ink bar.
+  h2 {
+    font-size: 1.35em;
+    margin-top: 36px;
+    padding-bottom: 0;
+    &::after {
+      content: "";
+      display: block;
+      width: 32px;
+      height: 3px;
+      margin-top: 6px;
+      border-radius: 2px;
+      background: $ink;
+    }
+  }
+
+  // Contact callout.
+  #contact + p {
+    background: $bg;
+    border-radius: 14px;
+    padding: 16px 20px;
+  }
+
+  // Support Q&A: each question becomes its own card.
+  #common-questions ~ p {
+    background: #faf9f6;
+    border: 1px solid $line;
+    border-radius: 14px;
+    padding: 16px 20px;
+    margin-bottom: 12px;
+    color: $muted;
+    > strong:first-child {
+      display: block;
+      margin-bottom: 4px;
+      color: $ink;
+      font-size: 1.02em;
+    }
+  }
+}
+
+.page-footer {
+  text-align: center;
+  padding: 8px 16px 40px;
+  color: $muted;
+  .badge img { background: none; }
+  p { margin: 14px 0 0; }
+  a { color: $muted; }
+  a:hover { color: $ink; }
+}
+
 @media (max-width: 480px) {
-  .markdown-body { padding: 24px 18px !important; }
   .hero h1 { font-size: 2.8em; }
   .features { grid-template-columns: 1fr; }
+  .subpage .markdown-body { padding: 28px 20px !important; }
+  .subpage .markdown-body > h1:first-child { font-size: 2.1em; }
+  .topbar { justify-content: center; }
 }

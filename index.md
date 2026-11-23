@@ -1,5 +1,5 @@
 ---
-title: Trio — ADHD Planner
+title: Trio
 permalink: /
 ---
 
